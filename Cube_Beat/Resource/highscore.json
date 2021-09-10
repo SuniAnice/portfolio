@@ -1,0 +1,19 @@
+{
+	"Rank" : 
+	[
+		3,
+		2
+	],
+	"Rankimg" : 
+	[
+		"../Resource/Rank_S.bmp",
+		"../Resource/Rank_A.bmp",
+		"../Resource/Rank_B.bmp",
+		"../Resource/Rank_C.bmp"
+	],
+	"Score" : 
+	[
+		112,
+		100041
+	]
+}
