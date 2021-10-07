@@ -194,6 +194,10 @@ struct node {
 	int dir = -1;
 	node *parent = nullptr;
 
+	node() {}
+	node(int x, int y, int dir, node* parent) : x(x), y(y), dir(dir), g(parent->g + 1), parent(parent) {}
+	~node() {}
+
 	constexpr bool operator< (const node& l) const {
 		return (f > l.f);
 	}
@@ -270,12 +274,7 @@ int a_star_search(int p_id, int o_id) {
 			{
 				if (!obstacles[cur->x][cur->y - 1]) {
 					bool found = false;
-					child = new node();
-					child->dir = 0;
-					child->x = cur->x;
-					child->y = cur->y - 1;
-					child->g = cur->g + 1;
-					child->parent = cur;
+					child = new node(cur->x, cur->y - 1, 0, cur);
 					child->f = get_dist(child->x, child->y, tx, ty) + child->g;
 					for (auto& c : open) {
 						if (c->x == child->x && c->y == child->y)
@@ -295,12 +294,7 @@ int a_star_search(int p_id, int o_id) {
 			{
 				if (!obstacles[cur->x][cur->y + 1]) {
 					bool found = false;
-					child = new node();
-					child->dir = 1;
-					child->x = cur->x;
-					child->y = cur->y + 1;
-					child->g = cur->g + 1;
-					child->parent = cur;
+					child = new node(cur->x, cur->y+1, 1, cur);
 					child->f = get_dist(child->x, child->y, tx, ty) + child->g;
 					for (auto& c : open) {
 						if (c->x == child->x && c->y == child->y)
@@ -320,12 +314,7 @@ int a_star_search(int p_id, int o_id) {
 			{
 				if (!obstacles[cur->x - 1][cur->y]) {
 					bool found = false;
-					child = new node();
-					child->dir = 2;
-					child->x = cur->x - 1;
-					child->y = cur->y;
-					child->g = cur->g + 1;
-					child->parent = cur;
+					child = new node(cur->x-1, cur->y, 2, cur);
 					child->f = get_dist(child->x, child->y, tx, ty) + child->g;
 					for (auto& c : open) {
 						if (c->x == child->x && c->y == child->y)
@@ -345,12 +334,7 @@ int a_star_search(int p_id, int o_id) {
 			{
 				if (!obstacles[cur->x + 1][cur->y]) {
 					bool found = false;
-					child = new node();
-					child->dir = 3;
-					child->x = cur->x + 1;
-					child->y = cur->y;
-					child->g = cur->g + 1;
-					child->parent = cur;
+					child = new node(cur->x+1, cur->y, 3, cur);
 					child->f = get_dist(child->x, child->y, tx, ty) + child->g;
 					for (auto& c : open) {
 						if (c->x == child->x && c->y == child->y)
